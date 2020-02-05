@@ -1,5 +1,8 @@
 #include "DynGuiManager.hpp"
+#include "ANibblerGui.hpp"
+#include "Logging.hpp"
 #include <string>
+#include <dlfcn.h>
 
 // contain dynamic libs info
 std::array<std::pair< std::string const, std::string const >, NB_GUI> const	DynGuiManager::_guiInfos = {{
@@ -43,11 +46,35 @@ DynGuiManager &DynGuiManager::operator=(DynGuiManager const &rhs) {
 
 uint8_t		DynGuiManager::getCurrentGuiID() const { return _currentGuiID; }
 
-
 // -- Methods ------------------------------------------------------------------
 
-void	loadGui(uint8_t id) {
-	(void)id;
+void	DynGuiManager::loadGui(uint8_t id) {
+	logInfo("Load GUI " + std::to_string(id));
+
+	if (id >= NB_GUI || id < 0)
+		throw DynGuiManagerException((
+			"Not existence of GUI " + std::to_string(id)
+			).c_str());
+
+	if (_currentGuiID != NO_GUI_LOADED)
+		_quitGui();
+
+	_dl_handle = dlopen(_guiInfos[id].first.c_str(), RTLD_LAZY | RTLD_LOCAL);
+	if (!_dl_handle)
+		throw DynGuiManagerException(dlerror());
+
+	void* mkr = dlsym(_dl_handle, _guiInfos[id].second.c_str());
+	if (!nibblerGui)
+		throw DynGuiManagerException(dlerror());
+
+	_currentGuiID = id;
+	nibblerGui = reinterpret_cast<nibblerGuiCreator>(mkr)();
+}
+
+void	DynGuiManager::_quitGui() {
+	delete nibblerGui;
+	dlclose(_dl_handle);
+	_currentGuiID = NO_GUI_LOADED;
 }
 
 // -- Exceptions errors --------------------------------------------------------

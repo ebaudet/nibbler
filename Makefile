@@ -63,7 +63,7 @@
 # project global config
 
 # executable name
-NAME = eb_nibbler
+NAME = nibbler
 # args (./NAME ARGS) (make exec ARGS="-v" -> ./name -v)
 ARGS =
 # compiler (g++ or clang++)
@@ -94,7 +94,6 @@ DEBUG_DIR	= $(DEP_DIR)
 
 # SRCS_DIR/SRC
 SRC =	main.cpp \
-		nibbler.cpp \
 		DynGuiManager.cpp \
 \
 		utils/Logging.cpp \
