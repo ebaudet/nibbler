@@ -1,13 +1,14 @@
 #include "DynGuiManager.hpp"
+#include <dlfcn.h>
+#include <string>
+
 #include "ANibblerGui.hpp"
 #include "Logging.hpp"
-#include <string>
-#include <dlfcn.h>
 
 // contain dynamic libs info
 std::array<std::pair< std::string const, std::string const >, NB_GUI> const	DynGuiManager::_guiInfos = {{
 	{"libNibblerSDL.so", "makeNibblerSDL"},
-	{"libNibblerSFML.so", "makeNibblerSFML"}
+	// {"libNibblerSFML.so", "makeNibblerSFML"}
 }};
 
 // -- Constructors -------------------------------------------------------------
@@ -52,9 +53,8 @@ void	DynGuiManager::loadGui(uint8_t id) {
 	logInfo("Load GUI " + std::to_string(id));
 
 	if (id >= NB_GUI || id < 0)
-		throw DynGuiManagerException((
-			"Not existence of GUI " + std::to_string(id)
-			).c_str());
+		throw DynGuiManagerException(
+			("Not existence of GUI " + std::to_string(id)).c_str());
 
 	if (_currentGuiID != NO_GUI_LOADED)
 		_quitGui();
