@@ -13,6 +13,9 @@ private:
 	SDL_Surface	*_surface;
 	SDL_Event	*_event;
 
+	// Methods
+	void _printModifiers( SDL_Keymod mod );
+	void _printKeyInfo( SDL_KeyboardEvent *key );
 
 public:
 	// Constructors
