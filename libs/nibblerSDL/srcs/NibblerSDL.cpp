@@ -50,6 +50,9 @@ bool	NibblerSDL::init() {
 void	NibblerSDL::updateInput() {
 	logInfo("updateInput SDL");
 
+	// https://www.libsdl.org/release/SDL-1.2.15/docs/html/guideinputkeyboard.html
+	// https://wiki.libsdl.org/MigrationGuide
+
 	 /* Poll for events */
 	while( SDL_PollEvent( _event ) ){
 
