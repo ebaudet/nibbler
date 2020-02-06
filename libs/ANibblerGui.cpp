@@ -5,18 +5,18 @@
 ANibblerGui::ANibblerGui() {
 }
 
-ANibblerGui::ANibblerGui(ANibblerGui const &src) {
-	*this = src;
+ANibblerGui::~ANibblerGui() {
 }
 
-ANibblerGui::~ANibblerGui() {
+ANibblerGui::ANibblerGui(ANibblerGui const &src) {
+	*this = src;
 }
 
 // -- Operators ----------------------------------------------------------------
 
 ANibblerGui &ANibblerGui::operator=(ANibblerGui const &rhs) {
 	if ( this != &rhs ) {
-		intput = rhs.intput;
+		input = rhs.input;
 	}
 	return *this;
 }

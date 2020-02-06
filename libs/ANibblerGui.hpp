@@ -42,7 +42,7 @@ public:
 	};
 
 	// Members
-	Input intput;
+	Input input;
 };
 
 typedef ANibblerGui *(*nibblerGuiCreator)();

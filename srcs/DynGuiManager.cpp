@@ -63,12 +63,12 @@ void	DynGuiManager::loadGui(uint8_t id) {
 	if (!_dl_handle)
 		throw DynGuiManagerException(dlerror());
 
-	void* mkr = dlsym(_dl_handle, _guiInfos[id].second.c_str());
-	if (!nibblerGui)
+	void* ptr = dlsym(_dl_handle, _guiInfos[id].second.c_str());
+	if (!ptr)
 		throw DynGuiManagerException(dlerror());
 
 	_currentGuiID = id;
-	nibblerGui = reinterpret_cast<nibblerGuiCreator>(mkr)();
+	nibblerGui = reinterpret_cast<nibblerGuiCreator>(ptr)();
 }
 
 void	DynGuiManager::_quitGui() {

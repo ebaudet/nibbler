@@ -71,7 +71,7 @@ CC = g++
 # flags for compilation
 CFLAGS = -Ofast -std=c++11 -Wall -Wextra
 # flags only for debug mode (make DEBUG=1)
-DEBUG_FLAGS = -g3 -DDEBUG=true
+DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
 NODEBUG_FLAGS = -Werror
 # flags to create the .d files
@@ -100,7 +100,8 @@ SRC =	main.cpp \
 		utils/Stats.cpp \
 
 # INC_DIR/HEAD
-HEAD =	DynGuiManager.hpp \
+HEAD =	main.hpp \
+		DynGuiManager.hpp \
 \
 		utils/Logging.hpp \
 		utils/Stats.hpp \

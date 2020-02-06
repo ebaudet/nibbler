@@ -56,7 +56,7 @@ CC = g++
 # flags for compilation
 CFLAGS = -Ofast -std=c++11 -Wall -Wextra
 # flags only for debug mode (make DEBUG=1)
-DEBUG_FLAGS = -g3 -DDEBUG=true
+DEBUG_FLAGS = -g3 -DDEBUG=true -fsanitize=address
 # classic flags
 NODEBUG_FLAGS = -Werror
 # flags to create the .d files
@@ -80,10 +80,12 @@ DEBUG_DIR	= $(DEP_DIR)
 # SRCS_DIR/SRC
 SRC =	../../ANibblerGui.cpp \
 		Logging.cpp \
+		NibblerSDL.cpp \
 
 # INC_DIR/HEAD
 HEAD =	../../ANibblerGui.hpp \
 		Logging.hpp \
+		NibblerSDL.hpp \
 
 
 ################################################################################
